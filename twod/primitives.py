@@ -1,6 +1,7 @@
 """
 This file defines the basic primitives used by the rest of the package.
 """
+import math
 
 EPS = 1e-9
 
@@ -16,7 +17,23 @@ class Point:
         return "({}, {})".format(self.x, self.y)
 
     def __repr__(self):
-        return "Point({}, {})".format(self.x, self.y)
+        return "({}, {})".format(self.x, self.y)
+
+    def __hash__(self):
+        return hash((self.x, self.y))
+
+    def __eq__(self, other):
+        return other.x == self.x and other.y == self.y
+
+    def polar(self, ref=(0.0, 0.0)):
+        x = self.x - ref[0]
+        y = self.y - ref[1]
+        r = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
+        theta = math.atan2(y , x)
+        return (r, theta)
+
+    def cartesian(self, ref=(0.0, 0.0)):
+        return (self.x - ref[0], self.y - ref[1])
 
 
 class LineSegment:

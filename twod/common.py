@@ -26,3 +26,40 @@ def perimeter(points: List[Point], dist=euclidian_distance) -> float:
         n = (i + 1) % len(points)
         acc += dist(points[i], points[n])
     return acc
+
+
+def inside(poly: List[Point], p: Point) -> bool:
+    '''
+    Determines if point is inside polygon using the winding number method
+    '''
+    wn = 0
+    for i in range(len(poly)):
+        n = (i + 1) % len(poly)
+        if poly[i].y <= p.y and poly[n].y > p.y and cross(poly[i], poly[n],
+                                                          p) > 0:
+            wn += 1
+        elif poly[n].y <= p.y and cross(poly[i], poly[n], p) < 0:
+            wn -= 1
+    return wn != 0
+
+
+def cross(p1: Point, p2: Point, p3: Point) -> float:
+    return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x)
+
+
+def argmin(l, f=lambda x: x):
+    if len(l) == 0:
+        return None, None
+    item = l[0]
+    min_val = f(item)
+    indx = 0
+    for i, v in enumerate(l):
+        if f(v) <= min_val:
+            min_val = f(v)
+            item = v
+            indx = i
+    return item, indx
+
+
+def argmax(l, f=lambda x: x):
+    return argmin(l, lambda x: -f(x))
