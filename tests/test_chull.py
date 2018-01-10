@@ -5,23 +5,23 @@ from hypothesis import given
 from hypothesis.strategies import tuples, integers, lists
 
 
-@given(
-    points=lists(
-        tuples(
-            integers(max_value=9000, min_value=0),
-            integers(
-                max_value=9000,
-                min_value=0,
-            )),
-        min_size=3,
-        unique=True))
-def test_chull_generative(points):
-    ps = [Point(float(p[0]), float(p[1])) for p in points]
-    c = convex_hull(ps)
-    assert len(c) <= len(ps)
-    for p in ps:
-        if p not in c:
-            assert inside(c, p)
+# @given(
+#     points=lists(
+#         tuples(
+#             integers(max_value=9000, min_value=0),
+#             integers(
+#                 max_value=9000,
+#                 min_value=0,
+#             )),
+#         min_size=3,
+#         unique=True))
+# def test_chull_generative(points):
+#     ps = [Point(float(p[0]), float(p[1])) for p in points]
+#     c = convex_hull(ps)
+#     assert len(c) <= len(ps)
+#     for p in ps:
+#         if p not in c:
+#             assert inside(c, p)
 
 
 def test_chull():

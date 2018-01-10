@@ -80,6 +80,7 @@ def test_argmax(xs):
 
 
 def test_inside():
-    points = [Point(0.0,0.0), Point(0.0,1.0), Point(1.0,1.0), Point(1.0,0.0)]
-    p = Point(0.5, 0.5)
+    points = [Point(0.0, 0.0), Point(4.0, 0.0), Point(0.0, 3.0), Point(0.0, 2.0), Point(0.0, 0.0)]
+    p = Point(1.0, 2.0)
     assert inside(points, p)
+

@@ -32,6 +32,7 @@ def inside(poly: List[Point], p: Point) -> bool:
     '''
     Determines if point is inside polygon using the winding number method
     '''
+    poly.append(poly[0])
     wn = 0
     for i in range(len(poly)):
         n = (i + 1) % len(poly)
