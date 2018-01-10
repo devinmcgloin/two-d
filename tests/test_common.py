@@ -1,5 +1,5 @@
 from twod.primitives import Point, EPS
-from twod.common import area, perimeter, argmax, argmin, inside
+from twod.common import area, perimeter, arg_max, arg_min, inside
 from hypothesis import given
 from hypothesis.strategies import tuples, floats, lists, integers
 import math
@@ -58,7 +58,7 @@ def test_perimeter():
 
 @given(xs=lists(integers(), min_size=1))
 def test_argmin(xs):
-    x, indx = argmin(xs)
+    x, indx = arg_min(xs)
     m = min(xs)
     last_index = -1
     for i, v in enumerate(xs):
@@ -69,7 +69,7 @@ def test_argmin(xs):
 
 @given(xs=lists(integers(),min_size=1))
 def test_argmax(xs):
-    x, indx = argmax(xs)
+    x, indx = arg_max(xs)
     m = max(xs)
     last_index = -1
     for i, v in enumerate(xs):

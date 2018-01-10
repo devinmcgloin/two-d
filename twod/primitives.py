@@ -29,7 +29,7 @@ class Point:
         x = self.x - ref[0]
         y = self.y - ref[1]
         r = math.sqrt(math.pow(x, 2) + math.pow(y, 2))
-        theta = math.atan2(y , x)
+        theta = math.atan2(y, x)
         return (r, theta)
 
     def cartesian(self, ref=(0.0, 0.0)):

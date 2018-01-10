@@ -2,14 +2,14 @@ from twod.primitives import Point
 from twod.common import inside
 from twod.chull import convex_hull
 from hypothesis import given
-from hypothesis.strategies import tuples, integers, lists
+from hypothesis.strategies import tuples, floats, integers, lists
 
-
+#
 # @given(
 #     points=lists(
 #         tuples(
-#             integers(max_value=9000, min_value=0),
-#             integers(
+#             floats(max_value=9000, min_value=0),
+#             floats(
 #                 max_value=9000,
 #                 min_value=0,
 #             )),

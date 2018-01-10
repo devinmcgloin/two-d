@@ -3,8 +3,8 @@ This file implements convex hull and associated helper functions
 '''
 from typing import List, Tuple, Callable
 from .primitives import Point
-from .common import argmin, cross
-from .distance import euclidian_distance
+from .common import arg_min, cross
+from .distance import euclidean_distance
 
 
 def convex_hull(points: List[Point]) -> List[Point]:
@@ -44,7 +44,7 @@ def polar_sort(key_point: Point) -> Callable[[Point], Tuple[float, float]]:
 
 
 def bottommost(points: List[Point]) -> Tuple[Point, int]:
-    return argmin(points, lambda p: (p.y, p.x))
+    return arg_min(points, lambda p: (p.y, p.x))
 
 
 def left_turn(p1: Point, p2: Point, p3: Point) -> bool:

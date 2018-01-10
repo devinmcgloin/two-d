@@ -1,14 +1,13 @@
 from typing import List
-import math
 
-from .primitives import Point, EPS
-from .distance import euclidian_distance
+from .primitives import Point
+from .distance import euclidean_distance
 
 
 def area(points: List[Point]) -> float:
     """
     This function should first break the polygon up into triangles and sum
-    them. This avoids clockwise / counterclockwise algorithms that are simplier
+    them. This avoids clockwise / counterclockwise algorithms that are simpler
     to implement but more fragile.
 
     It will still not handle polygons that fold onto themselves.
@@ -16,28 +15,35 @@ def area(points: List[Point]) -> float:
     pass
 
 
-def perimeter(points: List[Point], dist=euclidian_distance) -> float:
+def perimeter(poly: List[Point], dist=euclidean_distance) -> float:
     """
-    perimeter calculates the perimeter of the polygon with the given distance
-    metric. By default euclidian distance.
+    perimeter calculates the perimeter of the polygon.
+    :param poly: list of points in which the first element is not the last.
+    :param dist: distance function to be used, by default euclidean distance.
+    :return: the perimeter of the polygon.
     """
     acc = 0.0
-    for i, _ in enumerate(points):
-        n = (i + 1) % len(points)
-        acc += dist(points[i], points[n])
+    for i, _ in enumerate(poly):
+        n = (i + 1) % len(poly)
+        acc += dist(poly[i], poly[n])
     return acc
 
 
 def inside(poly: List[Point], p: Point) -> bool:
-    '''
+    """
     Determines if point is inside polygon using the winding number method
-    '''
+    :param poly: polygon to be checked. poly[0] != poly[len(poly)].
+    That is the shape should not be closed. The function takes care of closing the shape itself.
+    :param p: point to be checked
+    :return: true iff p is inside poly. If p is on one of the edges of the polygon the
+    inside will return false.
+    """
     poly.append(poly[0])
     wn = 0
     for i in range(len(poly)):
         n = (i + 1) % len(poly)
-        if poly[i].y <= p.y and poly[n].y > p.y and cross(poly[i], poly[n],
-                                                          p) > 0:
+        if poly[i].y <= p.y < poly[n].y and cross(poly[i], poly[n],
+                                                  p) > 0:
             wn += 1
         elif poly[n].y <= p.y and cross(poly[i], poly[n], p) < 0:
             wn -= 1
@@ -48,7 +54,7 @@ def cross(p1: Point, p2: Point, p3: Point) -> float:
     return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x)
 
 
-def argmin(l, f=lambda x: x):
+def arg_min(l, f=lambda x: x):
     if len(l) == 0:
         return None, None
     item = l[0]
@@ -62,5 +68,5 @@ def argmin(l, f=lambda x: x):
     return item, indx
 
 
-def argmax(l, f=lambda x: x):
-    return argmin(l, lambda x: -f(x))
+def arg_max(l, f=lambda x: x):
+    return arg_min(l, lambda x: -f(x))
