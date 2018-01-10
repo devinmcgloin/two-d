@@ -89,8 +89,6 @@ def test_chull():
         Point(-0.4404289572876217, -0.2894855991839297),
     ]
 
-    print(expected_hull)
-    print(actual_hull)
     assert len(expected_hull) == len(actual_hull)
 
     for p in actual_hull:

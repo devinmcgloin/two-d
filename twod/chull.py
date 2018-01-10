@@ -19,8 +19,6 @@ def convex_hull(points: List[Point]) -> List[Point]:
     points.sort(key=polar_sort(bottom))
     points.insert(0, bottom)
 
-    print(points)
-    print(list(map(polar_sort(bottom), points)))
     stack.append(points[0])
     stack.append(points[1])
     stack.append(points[2])
