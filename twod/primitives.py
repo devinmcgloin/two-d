@@ -44,6 +44,14 @@ class LineSegment:
         self.b = b
 
 
+class Triangle:
+    def __init__(self, a, b, c):
+        if not isinstance(a, Point) or not isinstance(b, Point):
+            raise ValueError("either a, b or c are not points")
+        self.a = a
+        self.b = b
+        self.c = c
+
 class Angle:
     def __init__(self, a, b, c):
         if not isinstance(a, Point) or not isinstance(

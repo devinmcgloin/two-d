@@ -32,6 +32,7 @@ def perimeter(poly: List[Point], dist=euclidean_distance) -> float:
 def inside(poly: List[Point], p: Point) -> bool:
     """
     Determines if point is inside polygon using the winding number method
+    See: http://geomalgorithms.com/a03-_inclusion.html
     :param poly: polygon to be checked. poly[0] != poly[len(poly)].
     That is the shape should not be closed. The function takes care of closing the shape itself.
     :param p: point to be checked
